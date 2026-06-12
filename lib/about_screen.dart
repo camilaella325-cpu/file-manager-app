@@ -63,7 +63,7 @@ class AboutScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Camila Ella',
+                  'Abraham Matthew',
                   style: TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 30),
