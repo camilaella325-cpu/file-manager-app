@@ -6,6 +6,7 @@ import '../widgets/file_list.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/storage_info.dart';
 import '../about_screen.dart';
+import '../utils/animation_utils.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,32 +34,35 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, _) {
-              return IconButton(
+              return AnimatedIconButton(
                 icon: Icon(
                   themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
                 ),
                 onPressed: () => themeProvider.toggleTheme(),
+                tooltip: 'Toggle theme',
               );
             },
           ),
           Consumer<FileProvider>(
             builder: (context, fileProvider, _) {
-              return IconButton(
+              return AnimatedIconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: fileProvider.currentPath.isEmpty
                     ? null
                     : () => fileProvider.goBack(),
+                tooltip: 'Go back',
               );
             },
           ),
-          IconButton(
+          AnimatedIconButton(
             icon: const Icon(Icons.info_outline),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AboutScreen()),
+                AnimationUtils.slideTransition(const AboutScreen()),
               );
             },
+            tooltip: 'About',
           ),
         ],
       ),
