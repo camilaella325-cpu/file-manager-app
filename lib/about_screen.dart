@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
-import 'dart:io' show Platform;
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
-  void _launchURL(String url) async {
-    // In a real app, you would use url_launcher package
-    // For now, this is a placeholder
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Opening: $url')),
-    );
+  // Social Media URLs - Update these with your actual profiles
+  static const String githubURL = 'https://github.com/camilaella325-cpu';
+  static const String twitterURL = 'https://twitter.com';
+  static const String linkedinURL = 'https://linkedin.com';
+
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      // Fallback if URL cannot be launched
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not launch $url')),
+      );
+    }
   }
 
   @override
@@ -82,11 +91,7 @@ class AboutScreen extends StatelessWidget {
                     SocialMediaButton(
                       icon: Icons.code,
                       label: 'GitHub',
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Opening GitHub...')),
-                        );
-                      },
+                      onPressed: () => _launchURL(githubURL),
                     ),
                     const SizedBox(width: 15),
                     
@@ -94,11 +99,7 @@ class AboutScreen extends StatelessWidget {
                     SocialMediaButton(
                       icon: Icons.public,
                       label: 'Twitter',
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Opening Twitter...')),
-                        );
-                      },
+                      onPressed: () => _launchURL(twitterURL),
                     ),
                     const SizedBox(width: 15),
                     
@@ -106,11 +107,7 @@ class AboutScreen extends StatelessWidget {
                     SocialMediaButton(
                       icon: Icons.work,
                       label: 'LinkedIn',
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Opening LinkedIn...')),
-                        );
-                      },
+                      onPressed: () => _launchURL(linkedinURL),
                     ),
                   ],
                 ),
