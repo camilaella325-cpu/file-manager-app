@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
+
+  void _launchURL(String url) async {
+    // In a real app, you would use url_launcher package
+    // For now, this is a placeholder
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Opening: $url')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,26 +18,147 @@ class AboutScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('About'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.folder, size: 80),
-            const SizedBox(height: 20),
-            const Text(
-              'File Manager App',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20),
+                // App Icon
+                const Icon(Icons.folder, size: 80, color: Colors.green),
+                const SizedBox(height: 20),
+                
+                // App Name
+                const Text(
+                  'File Manager App',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                
+                // Version
+                const Text('Version 1.0.0'),
+                const SizedBox(height: 30),
+                
+                // App Description
+                Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Text(
+                    'A powerful and intuitive file manager app for managing your files and folders. Organize, browse, and manage your device storage with ease.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                
+                // Developer Section
+                const Text(
+                  'Developer',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Camila Ella',
+                  style: TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 30),
+                
+                // Social Media Links
+                const Text(
+                  'Follow Me',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 15),
+                
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // GitHub
+                    SocialMediaButton(
+                      icon: Icons.code,
+                      label: 'GitHub',
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Opening GitHub...')),
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 15),
+                    
+                    // Twitter
+                    SocialMediaButton(
+                      icon: Icons.public,
+                      label: 'Twitter',
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Opening Twitter...')),
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 15),
+                    
+                    // LinkedIn
+                    SocialMediaButton(
+                      icon: Icons.work,
+                      label: 'LinkedIn',
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Opening LinkedIn...')),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                
+                // Go Back Button
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Go Back'),
+                ),
+                const SizedBox(height: 20),
+              ],
             ),
-            const SizedBox(height: 10),
-            const Text('Version 1.0.0'),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Go Back'),
-            ),
-          ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+// Social Media Button Widget
+class SocialMediaButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onPressed;
+
+  const SocialMediaButton({
+    Key? key,
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 30,
+          backgroundColor: Colors.green.shade300,
+          child: IconButton(
+            icon: Icon(icon, size: 24, color: Colors.white),
+            onPressed: onPressed,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(label, style: const TextStyle(fontSize: 12)),
+      ],
     );
   }
 }
