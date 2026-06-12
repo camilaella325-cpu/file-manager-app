@@ -32,6 +32,12 @@ dependencies:
   
   # URL Launcher - for opening social media links
   url_launcher: ^6.1.0
+  
+  # HTTP - for API calls
+  http: ^1.1.0
+  
+  # Share Plus - for sharing jokes
+  share_plus: ^7.0.0
 
 dev_dependencies:
   flutter_test:
