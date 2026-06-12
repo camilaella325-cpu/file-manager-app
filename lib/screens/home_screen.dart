@@ -5,6 +5,7 @@ import '../providers/file_provider.dart';
 import '../widgets/file_list.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/storage_info.dart';
+import '../about_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -47,6 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: fileProvider.currentPath.isEmpty
                     ? null
                     : () => fileProvider.goBack(),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutScreen()),
               );
             },
           ),
