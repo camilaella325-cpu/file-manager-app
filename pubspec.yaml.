@@ -19,7 +19,7 @@ dependencies:
   # File & Storage
   file_picker: ^6.0.0
   path_provider: ^2.1.1
-  permission_handler: ^12.0.0
+  permission_handler ^11.4.3
   
   # State Management
   provider: ^6.0.0
