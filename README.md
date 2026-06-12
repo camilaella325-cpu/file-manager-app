@@ -1,4 +1,4 @@
-# File Manager App
+# Amazing File Manager App
 
 A cross-platform file manager built with Flutter that provides powerful file management capabilities with an intuitive user interface.
 
