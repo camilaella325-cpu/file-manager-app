@@ -29,6 +29,9 @@ dependencies:
   
   # Utils
   intl: ^0.19.0
+  
+  # URL Launcher - for opening social media links
+  url_launcher: ^6.1.0
 
 dev_dependencies:
   flutter_test:
