@@ -22,7 +22,7 @@ dependencies:
   permission_handler: ^11.4.3
   
   # Storage Analysis
-  disk_space: ^1.2.3
+  disk_space_2: ^0.4.0
   
   # State Management
   provider: ^6.0.0
